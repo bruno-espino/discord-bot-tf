@@ -55,7 +55,7 @@ resource "aws_security_group" "bot_sg" {
 
 
 resource "aws_instance" "bot" {
-  ami                    = data.aws_ami.AL3.id
+  ami                    = data.aws_ami.ubuntu.id
   instance_type          = "t2.micro"
   vpc_security_group_ids = [aws_security_group.bot_sg.id]
   subnet_id              = aws_subnet.bot_subnet.id

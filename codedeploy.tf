@@ -52,7 +52,7 @@ resource "aws_codedeploy_deployment_group" "bot_deploy" {
   }
 
   auto_rollback_configuration {
-    enabled = true
+    enabled = false
     events  = ["DEPLOYMENT_FAILURE"]
   }
 }
