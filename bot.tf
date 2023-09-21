@@ -17,8 +17,9 @@ resource "aws_iam_role" "bot_role" {
     ]
   })
   managed_policy_arns = ["arn:aws:iam::aws:policy/service-role/AmazonEC2RoleforAWSCodeDeploy", "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"]
-
 }
+
+
 resource "aws_iam_instance_profile" "bot_profile" {
   name = "bot-profile"
   role = aws_iam_role.bot_role.name
@@ -42,7 +43,8 @@ resource "aws_security_group" "bot_sg" {
     from_port   = 22
     to_port     = 22
     protocol    = "TCP"
-    cidr_blocks = ["0.0.0.0/0"]
+    #EC2 Instance connect IP CIDR range for us-east-1
+    cidr_blocks = ["18.206.107.24/29"]
   }
 
   egress {
@@ -64,7 +66,7 @@ resource "aws_instance" "bot" {
   lifecycle {
     ignore_changes = [ami]
   }
-  user_data = file("userdata.tpl")
+  user_data                   = file("userdata.tpl")
   user_data_replace_on_change = true
   tags = {
     Name = "botardo"

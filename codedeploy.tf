@@ -1,16 +1,3 @@
-resource "random_id" "bucket_id" {
-  byte_length = 10
-}
-resource "aws_s3_bucket" "deploy_bucket" {
-  bucket = "deploy-bucket-${random_id.bucket_id.hex}"
-}
-resource "aws_s3_bucket_versioning" "deploy_bucket_version" {
-  bucket = aws_s3_bucket.deploy_bucket.id
-  versioning_configuration {
-    status = "Enabled"
-  }
-
-}
 resource "aws_iam_role" "code_deploy_role" {
   name = "code_deploy_role"
   assume_role_policy = jsonencode({
@@ -32,11 +19,11 @@ resource "aws_iam_role" "code_deploy_role" {
 }
 
 
-
 resource "aws_codedeploy_app" "bot_app" {
   compute_platform = "Server"
   name             = "bot-app"
 }
+
 
 resource "aws_codedeploy_deployment_group" "bot_deploy" {
   app_name              = aws_codedeploy_app.bot_app.name

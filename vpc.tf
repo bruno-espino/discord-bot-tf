@@ -1,7 +1,6 @@
 resource "aws_vpc" "bot_vpc" {
   cidr_block           = var.vpc_cidr_block
   enable_dns_hostnames = true
-
 }
 
 resource "aws_subnet" "bot_subnet" {
@@ -9,13 +8,10 @@ resource "aws_subnet" "bot_subnet" {
   cidr_block              = var.subnet_cidr_block
   map_public_ip_on_launch = true
   availability_zone       = var.subnet_az
-
-
 }
 
 resource "aws_internet_gateway" "bot_internet_gateway" {
   vpc_id = aws_vpc.bot_vpc.id
-
 }
 
 resource "aws_route_table" "bot_public_rt" {
