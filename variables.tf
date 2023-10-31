@@ -11,7 +11,3 @@ variable "subnet_cidr_block" {
 variable "subnet_az" {
   default = "us-east-1a"
 }
-
-variable "key_name" {
-  default = "dgz-bot"
-}

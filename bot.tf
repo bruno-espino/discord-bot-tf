@@ -62,7 +62,6 @@ resource "aws_instance" "bot" {
   vpc_security_group_ids = [aws_security_group.bot_sg.id]
   subnet_id              = aws_subnet.bot_subnet.id
   iam_instance_profile   = aws_iam_instance_profile.bot_profile.id
-  key_name               = var.key_name
   lifecycle {
     ignore_changes = [ami]
   }
